@@ -149,7 +149,7 @@ resource "aws_autoscaling_group" "main" {
     for_each = merge(
       local.common_tags,
       {
-      name="${local.common_name_suffix}-${var.component}"
+      name="${local.common_name_suffix}-${var.component}-${timestamp()}"
       }
     )
     content { 
