@@ -124,11 +124,11 @@ resource "aws_launch_template" "main" {
 
 resource "aws_autoscaling_group" "main" {
   name                      = "${local.common_name_suffix}-${var.component}"
-  max_size                  = 10
+  max_size                  = 3
   min_size                  = 1
   health_check_grace_period = 100
   health_check_type         = "ELB"
-  desired_capacity          = 4
+  desired_capacity          = 2
   force_delete              = false
    launch_template {
     id      = aws_launch_template.main.id
@@ -149,7 +149,7 @@ resource "aws_autoscaling_group" "main" {
     for_each = merge(
       local.common_tags,
       {
-      name="${local.common_name_suffix}-${var.component}-${timestamp()}"
+      name="${local.common_name_suffix}-${var.component}"
       }
     )
     content { 
